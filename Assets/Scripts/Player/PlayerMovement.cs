@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public float jumpDelay = 3f;
+    public float playerHealth = 10;
     private Rigidbody rb;
     private bool canJump = true;
     public Animator anim;
     private bool isFacingRight = true; // Menyimpan arah hadap karakter
 
+    public GameObject shadow, attackArea;
+    public Image PlayerBar;
+    private bool isAttack;
+    private string attackType;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        isAttack = false;
+        attackArea.SetActive(false);
     }
 
     private void Update()
@@ -30,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
             FlipCharacter();
         }
 
-        if (canJump)
+        if (canJump && !isAttack)
         {
             if (horizontalInput != 0f || verticalInput != 0f)
             {
@@ -47,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(EnableJump(1f));
             }
         }
+
+        if(isAttack)
+        {
+            anim.Play(attackType);
+        }
+
+        shadow.transform.position = new Vector3(transform.position.x, shadow.transform.position.y, transform.position.z);
+
+        PlayerBar.fillAmount = playerHealth / 10f;
     }
 
     private IEnumerator EnableJump(float time)
@@ -63,5 +81,35 @@ public class PlayerMovement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1; // Memutar skala horizontal
         transform.localScale = theScale;
+    }
+
+    public void BasicAttack()
+    {
+        StartCoroutine(AttacAnimkDelay("BasicAttack"));
+        StartCoroutine(AttackDelay());
+    }
+
+    public void SpecialAttack()
+    {
+        StartCoroutine(AttacAnimkDelay("SpecialAttack"));
+        StartCoroutine(AttackDelay());
+    }
+
+    private IEnumerator AttacAnimkDelay(string typeAttack)
+    {
+        attackType = typeAttack;
+        if(isAttack == false)
+        {
+            isAttack = true;
+            yield return new WaitForSeconds(0.3f);
+            isAttack = false;
+        }
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        attackArea.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        attackArea.SetActive(false);
     }
 }
