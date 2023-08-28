@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 3355250202531569657}
   - component: {fileID: 3355250202531569663}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,6 +162,12 @@ MonoBehaviour:
   enemyHealthBar: {fileID: 3355250202715558266}
   isMoving: 1
   attackDelay: 1
+  AnimationRun: Enemy Run
+  AnimationIdle: Enemy Idle
+  AnimationDeath: Enemy Death
+  AnimationAttack1: Enemy Attack 1
+  AnimationAttack2: Enemy Attack 2
+  AnimationAttack3: Enemy Attack 3
 --- !u!65 &3355250202531569656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -173,7 +179,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Size: {x: 0.7, y: 1.5, z: 0.7}
   m_Center: {x: -0.0003681183, y: 0.10934585, z: 0}
 --- !u!136 &3355250202531569657
 CapsuleCollider:

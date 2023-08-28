@@ -22,19 +22,29 @@ public class EnemyState : MonoBehaviour
     private int indexAnimAttack;
     private bool isAttacking;
     private bool isDie;
+    public bool isFollow;
+
+    [Header("Animation Name")]
+    public string AnimationRun;
+    public string AnimationIdle;
+    public string AnimationDeath;
+    public string AnimationAttack1;
+    public string AnimationAttack2;
+    public string AnimationAttack3;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerObj = GameObject.FindGameObjectWithTag("Player");
         startDelay = attackDelay;
+
         isAttacking = false;
         isDie = false;
     }
 
     private void Update()
     {
-        if(!isDie)
+        if(!isDie && isFollow)
         {
             if (isMoving)
             {
@@ -45,7 +55,13 @@ public class EnemyState : MonoBehaviour
                 EnemyAttack();
             }
         }
-        else
+
+        if(!isFollow)
+        {
+            anim.Play(AnimationIdle);
+        }
+
+        if(isDie)
         {
             StartCoroutine(DieCourotine());
         }
@@ -75,16 +91,16 @@ public class EnemyState : MonoBehaviour
         transform.localScale = newScale;
         transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
 
-        anim.Play("Enemy Run");
+        anim.Play(AnimationRun);
     }
 
     private void EnemyAttack()
     {
         if(isAttack)
         {
-            if (indexAnimAttack == 1) { anim.Play("Enemy Attack 1"); }
-            else if(indexAnimAttack == 2) { anim.Play("Enemy Attack 2"); }
-            else if(indexAnimAttack == 3) { anim.Play("Enemy Attack 3"); }
+            if (indexAnimAttack == 1) { anim.Play(AnimationAttack1); }
+            else if(indexAnimAttack == 2) { anim.Play(AnimationAttack2); }
+            else if(indexAnimAttack == 3) { anim.Play(AnimationAttack3); }
 
             if(isAttacking)
             {
@@ -96,7 +112,7 @@ public class EnemyState : MonoBehaviour
         }
         else
         {
-            anim.Play("Enemy Idle");
+            anim.Play(AnimationIdle);
             isAttacking = true;
             startDelay -= Time.deltaTime;
         }
@@ -119,7 +135,7 @@ public class EnemyState : MonoBehaviour
 
     private IEnumerator DieCourotine()
     {
-        anim.Play("Enemy Death");
+        anim.Play(AnimationDeath);
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

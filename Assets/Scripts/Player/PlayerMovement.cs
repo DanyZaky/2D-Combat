@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
     private bool isFacingRight = true; // Menyimpan arah hadap karakter
 
+    public VariableJoystick variableJoystick;
+
     public GameObject shadow, attackArea;
     public Image PlayerBar;
     private bool isAttack;
@@ -31,17 +33,19 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(variableJoystick.Horizontal, 0f, variableJoystick.Vertical) * moveSpeed * Time.deltaTime;
         transform.Translate(movement);
 
-        if ((horizontalInput < 0 && isFacingRight) || (horizontalInput > 0 && !isFacingRight))
+        if ((variableJoystick.Horizontal < 0 && isFacingRight) || (variableJoystick.Horizontal > 0 && !isFacingRight))
         {
             FlipCharacter();
         }
 
+        
+
         if (canJump && !isAttack)
         {
-            if (horizontalInput != 0f || verticalInput != 0f)
+            if (variableJoystick.Horizontal != 0f || variableJoystick.Vertical != 0f)
             {
                 anim.Play("Run");
             }
@@ -93,6 +97,15 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(AttacAnimkDelay("SpecialAttack"));
         StartCoroutine(AttackDelay());
+    }
+
+    public void Jump()
+    {
+        if (canJump && !isAttack)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            StartCoroutine(EnableJump(1f));
+        }
     }
 
     private IEnumerator AttacAnimkDelay(string typeAttack)
