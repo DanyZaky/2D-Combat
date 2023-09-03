@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyState : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class EnemyState : MonoBehaviour
     private bool isAttacking;
     private bool isDie;
     public bool isFollow;
+
+    public GameObject textDamage;
+    public float offsetTextDamage;
 
     [Header("Animation Name")]
     public string AnimationRun;
@@ -150,6 +154,10 @@ public class EnemyState : MonoBehaviour
         if (other.gameObject.tag == "AttackArea")
         {
             enemyHealth -= 1;
+
+            GameObject spawnedPrefab = Instantiate(textDamage, new Vector3(transform.position.x, transform.position.y + offsetTextDamage, transform.position.z), Quaternion.identity);
+            spawnedPrefab.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "1";
+            Destroy(spawnedPrefab, 3f);
         }
     }
 

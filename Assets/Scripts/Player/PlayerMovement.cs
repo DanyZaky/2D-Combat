@@ -36,16 +36,18 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(variableJoystick.Horizontal, 0f, variableJoystick.Vertical) * moveSpeed * Time.deltaTime;
         transform.Translate(movement);
 
-        if ((variableJoystick.Horizontal < 0 && isFacingRight) || (variableJoystick.Horizontal > 0 && !isFacingRight))
+        //PC
+        Vector3 movementPC = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.deltaTime;
+        transform.Translate(movementPC);
+
+        if ((variableJoystick.Horizontal < 0 && isFacingRight) || (variableJoystick.Horizontal > 0 && !isFacingRight) || (horizontalInput < 0 && isFacingRight) || (horizontalInput > 0 && !isFacingRight))
         {
             FlipCharacter();
         }
 
-        
-
         if (canJump && !isAttack)
         {
-            if (variableJoystick.Horizontal != 0f || variableJoystick.Vertical != 0f)
+            if (variableJoystick.Horizontal != 0f || variableJoystick.Vertical != 0f || horizontalInput != 0f || verticalInput != 0f)
             {
                 anim.Play("Run");
             }

@@ -163,6 +163,8 @@ MonoBehaviour:
   isMoving: 1
   attackDelay: 0.5
   isFollow: 0
+  textDamage: {fileID: 2967169661730449534, guid: 430dad00c34740141823835dce191067, type: 3}
+  offsetTextDamage: 1
   AnimationRun: Enemy Run
   AnimationIdle: Enemy Idle
   AnimationDeath: Enemy Death
