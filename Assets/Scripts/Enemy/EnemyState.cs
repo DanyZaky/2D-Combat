@@ -8,12 +8,14 @@ public class EnemyState : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public int damageAmount = 10;
-    public float enemyHealth = 15;
+    public float enemyHealth;
+    public float maxEnemyHealth;
     public Animator anim;
     public Image enemyHealthBar;
 
     private Transform player;
     private GameObject playerObj;
+    private GameObject cameraObj;
     public bool isMoving;
     private bool isAttack;
     private int direction = 1;
@@ -28,6 +30,8 @@ public class EnemyState : MonoBehaviour
     public GameObject textDamage;
     public float offsetTextDamage;
 
+    public GameObject hpBar;
+
     [Header("Animation Name")]
     public string AnimationRun;
     public string AnimationIdle;
@@ -40,10 +44,15 @@ public class EnemyState : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerObj = GameObject.FindGameObjectWithTag("Player");
+        cameraObj = GameObject.FindGameObjectWithTag("Camera");
         startDelay = attackDelay;
 
         isAttacking = false;
         isDie = false;
+
+        maxEnemyHealth = enemyHealth;
+        hpBar.SetActive(false);
+        playerObj.GetComponent<PlayerMovement>().hpBar.SetActive(false);
     }
 
     private void Update()
@@ -75,7 +84,7 @@ public class EnemyState : MonoBehaviour
             isDie = true;
         }
 
-        enemyHealthBar.fillAmount = enemyHealth / 15f;
+        enemyHealthBar.fillAmount = enemyHealth / maxEnemyHealth;
     }
 
     private void EnemyFollow()
@@ -108,7 +117,15 @@ public class EnemyState : MonoBehaviour
 
             if(isAttacking)
             {
-                playerObj.GetComponent<PlayerMovement>().playerHealth -= 1;
+                playerObj.GetComponent<PlayerMovement>().playerHealth -= damageAmount;
+                
+                GameObject spawnedPrefab = Instantiate(textDamage, new Vector3(playerObj.transform.position.x, playerObj.transform.position.y + offsetTextDamage, playerObj.transform.position.z), Quaternion.identity);
+                spawnedPrefab.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = damageAmount.ToString("0");
+                spawnedPrefab.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.red;
+                Destroy(spawnedPrefab, 3f);
+
+                StartCoroutine(VisiblePlayerHPBar());
+
                 isAttacking = false;
             }
 
@@ -144,6 +161,20 @@ public class EnemyState : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private IEnumerator VisibleHPBar()
+    {
+        hpBar.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        hpBar.SetActive(false);
+    }
+
+    private IEnumerator VisiblePlayerHPBar()
+    {
+        playerObj.GetComponent<PlayerMovement>().hpBar.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        playerObj.GetComponent<PlayerMovement>().hpBar.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -158,6 +189,9 @@ public class EnemyState : MonoBehaviour
             GameObject spawnedPrefab = Instantiate(textDamage, new Vector3(transform.position.x, transform.position.y + offsetTextDamage, transform.position.z), Quaternion.identity);
             spawnedPrefab.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "1";
             Destroy(spawnedPrefab, 3f);
+
+            StartCoroutine(VisibleHPBar());
+            StartCoroutine(CameraShake());
         }
     }
 
@@ -167,5 +201,12 @@ public class EnemyState : MonoBehaviour
         {
             isMoving = true;
         }
+    }
+
+    private IEnumerator CameraShake()
+    {
+        cameraObj.GetComponent<Animator>().Play("CameraShake");
+        yield return new WaitForSeconds(0.07f);
+        cameraObj.GetComponent<Animator>().Play("Idle");
     }
 }

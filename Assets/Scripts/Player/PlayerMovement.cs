@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public float jumpDelay = 3f;
-    public float playerHealth = 10;
+    public float playerHealth;
+    public float maxPlayerHealth;
     private Rigidbody rb;
     private bool canJump = true;
     public Animator anim;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public VariableJoystick variableJoystick;
 
     public GameObject shadow, attackArea;
+    public GameObject hpBar;
     public Image PlayerBar;
     private bool isAttack;
     private string attackType;
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isAttack = false;
         attackArea.SetActive(false);
+        maxPlayerHealth = playerHealth;
     }
 
     private void Update()
@@ -70,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
         shadow.transform.position = new Vector3(transform.position.x, shadow.transform.position.y, transform.position.z);
 
-        PlayerBar.fillAmount = playerHealth / 10f;
+        PlayerBar.fillAmount = playerHealth / maxPlayerHealth;
     }
 
     private IEnumerator EnableJump(float time)
