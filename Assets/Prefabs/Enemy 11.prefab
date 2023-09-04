@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3355250202162670863}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0.356, y: 0.346, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1058977277, guid: b40783db7a88de946871eda9cc863366, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49259630cfa0892418093c598f60261b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 3355250202162670863}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9466a6145d63ec84c89dc09923b2f243, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8819c23e0c258b848a574bba4fa8b670, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   anim: {fileID: 3355250202162670861}
   enemyHealthBar: {fileID: 3355250202715558266}
   isMoving: 1
-  attackDelay: 0.5
+  attackDelay: 1
   isFollow: 0
   textDamage: {fileID: 2967169661730449534, guid: 430dad00c34740141823835dce191067, type: 3}
   offsetTextDamage: 1
@@ -172,7 +172,7 @@ MonoBehaviour:
   AnimationDeath: Enemy Death
   AnimationAttack1: Enemy Attack 1
   AnimationAttack2: Enemy Attack 2
-  AnimationAttack3: Enemy Attack 1
+  AnimationAttack3: Enemy Attack 3
 --- !u!65 &3355250202531569656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Size: {x: 0.7, y: 1.5, z: 0.7}
   m_Center: {x: -0.0003681183, y: 0.10934585, z: 0}
 --- !u!136 &3355250202531569657
 CapsuleCollider:
@@ -208,7 +208,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3355250202531569637}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -317,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3355250202807263795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.51, z: -0.424}
+  m_LocalPosition: {x: 0, y: -0.51, z: 0}
   m_LocalScale: {x: 1.6065, y: 0.22752999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1082,7 +1082,7 @@ GameObject:
   - component: {fileID: 312110526}
   - component: {fileID: 312110525}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: Block Wave 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5412,7 +5412,7 @@ GameObject:
   - component: {fileID: 1263340996}
   - component: {fileID: 1263340995}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Block Wave 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
