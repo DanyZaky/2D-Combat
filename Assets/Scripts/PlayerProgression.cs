@@ -6,10 +6,11 @@ public class PlayerProgression : MonoBehaviour
 {
     public CameraFollow cf;
     public GameObject player;
-    public GameObject panelWin;
 
     public EnemyWave[] allWave;
     public GameObject[] allEnemy;
+
+    public GameObject animFade;
 
     private int index;
 
@@ -26,11 +27,13 @@ public class PlayerProgression : MonoBehaviour
         {
             allWave[index].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
         }
+
+        StartCoroutine(FadeBlack("fade out"));
     }
 
     private void Update()
     {
-        if (index != allWave.Length)
+        if (index < allWave.Length)
         {
             bool allDestroyed = true;
             cf.maxXLimit = allWave[index].maxCameraLimit;
@@ -59,7 +62,17 @@ public class PlayerProgression : MonoBehaviour
         else if(index >= allWave.Length)
         {
             Debug.Log("win");
+
+            StartCoroutine(FadeBlack("fade in"));
         } 
+    }
+
+    private IEnumerator FadeBlack(string name)
+    {
+        animFade.GetComponent<Animator>().Play(name);
+        animFade.SetActive(true);
+        yield return new WaitForSeconds(1.1f);
+        animFade.SetActive(false);
     }
 }
 

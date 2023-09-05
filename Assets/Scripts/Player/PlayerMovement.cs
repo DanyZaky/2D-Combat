@@ -17,18 +17,30 @@ public class PlayerMovement : MonoBehaviour
 
     public VariableJoystick variableJoystick;
 
-    public GameObject shadow, attackArea;
+    public GameObject shadow, attackArea, specialAttackArea;
     public GameObject hpBar;
     public Image PlayerBar;
     private bool isAttack;
     private string attackType;
+
+    public Button specialAttackButton;
+    public Image specialAttackCooldownImage;
+    public float cooldownSpecialAttack;
+    public int specialAttackAmount;
+    private bool isCooldownSpecial;
+    private float currentCooldownTimeSpecial;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         isAttack = false;
         attackArea.SetActive(false);
+        specialAttackArea.SetActive(false);
         maxPlayerHealth = playerHealth;
+
+        specialAttackAmount = 0;
+        isCooldownSpecial = false;
+        currentCooldownTimeSpecial = cooldownSpecialAttack;
     }
 
     private void Update()
@@ -74,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
         shadow.transform.position = new Vector3(transform.position.x, shadow.transform.position.y, transform.position.z);
 
         PlayerBar.fillAmount = playerHealth / maxPlayerHealth;
+
+        CooldownSpecialAttack();
     }
 
     private IEnumerator EnableJump(float time)
@@ -95,13 +109,44 @@ public class PlayerMovement : MonoBehaviour
     public void BasicAttack()
     {
         StartCoroutine(AttacAnimkDelay("BasicAttack"));
-        StartCoroutine(AttackDelay());
+        StartCoroutine(AttackDelay(attackArea));
     }
 
     public void SpecialAttack()
     {
+        specialAttackAmount += 1;
+
         StartCoroutine(AttacAnimkDelay("SpecialAttack"));
-        StartCoroutine(AttackDelay());
+        StartCoroutine(AttackDelay(specialAttackArea));
+    }
+
+    private void CooldownSpecialAttack()
+    {
+        if(specialAttackAmount >= 3)
+        {
+            specialAttackCooldownImage.gameObject.SetActive(true);
+            isCooldownSpecial = true;
+        }
+
+        if(isCooldownSpecial)
+        {
+            specialAttackButton.interactable = false;
+            currentCooldownTimeSpecial -= 1 * Time.deltaTime;
+            specialAttackCooldownImage.fillAmount = currentCooldownTimeSpecial / cooldownSpecialAttack;
+
+            if (currentCooldownTimeSpecial <= 0)
+            {
+                isCooldownSpecial = false;
+                specialAttackAmount = 0;
+            }
+        }
+
+        if (!isCooldownSpecial)
+        {
+            specialAttackButton.interactable = true;
+            specialAttackCooldownImage.gameObject.SetActive(false);
+            currentCooldownTimeSpecial = cooldownSpecialAttack;
+        }
     }
 
     public void Jump()
@@ -124,10 +169,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator AttackDelay()
+    private IEnumerator AttackDelay(GameObject area)
     {
-        attackArea.SetActive(true);
+        area.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        attackArea.SetActive(false);
+        area.SetActive(false);
     }
 }

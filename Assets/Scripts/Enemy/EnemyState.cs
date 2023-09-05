@@ -191,6 +191,18 @@ public class EnemyState : MonoBehaviour
             Destroy(spawnedPrefab, 3f);
 
             StartCoroutine(VisibleHPBar());
+        }
+
+        if(other.gameObject.tag == "SpecialAttackArea")
+        {
+            int damage = Random.Range(2, 4);
+            enemyHealth -= damage;
+
+            GameObject spawnedPrefab = Instantiate(textDamage, new Vector3(transform.position.x, transform.position.y + offsetTextDamage, transform.position.z), Quaternion.identity);
+            spawnedPrefab.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = damage.ToString();
+            Destroy(spawnedPrefab, 3f);
+
+            StartCoroutine(VisibleHPBar());
             StartCoroutine(CameraShake());
         }
     }

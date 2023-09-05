@@ -8,6 +8,7 @@ TagManager:
   - AttackArea
   - Enemy
   - Camera
+  - SpecialAttackArea
   layers:
   - Default
   - TransparentFX
