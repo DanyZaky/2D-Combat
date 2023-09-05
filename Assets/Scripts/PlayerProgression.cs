@@ -8,97 +8,65 @@ public class PlayerProgression : MonoBehaviour
     public GameObject player;
     public GameObject panelWin;
 
-    public GameObject[] waveCollider;
-    public GameObject[] enemyWave1;
-    public GameObject[] enemyWave2;
-    public GameObject[] enemyWave3;
+    public EnemyWave[] allWave;
     public GameObject[] allEnemy;
 
-    private bool isWave1Done, isWave2Done;
+    private int index;
 
     private void Start()
     {
-        for (int i = 0; i < enemyWave1.Length; i++)
+        index = 0;
+
+        for (int i = 0; i < allWave.Length; i++)
         {
-            enemyWave1[i].GetComponent<EnemyState>().isFollow = true;
+            allWave[i].thisWaveCollider.SetActive(true);
         }
 
-        isWave1Done = true;
-        isWave2Done = true;
+        for (int i = 0; i < allWave[index].enemyWave.Length; i++)
+        {
+            allWave[index].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
+        }
     }
 
     private void Update()
     {
-        CheckWave(enemyWave1, 30, waveCollider[0]);
-        CheckWave(enemyWave2, 50, waveCollider[1]);
-
-        if(isWave1Done)
+        if (index != allWave.Length)
         {
-            if (player.transform.position.x >= 12)
+            bool allDestroyed = true;
+            cf.maxXLimit = allWave[index].maxCameraLimit;
+
+            foreach (GameObject obj in allWave[index].enemyWave)
             {
-                cf.minXLimit = 10;
-                for (int i = 0; i < enemyWave2.Length; i++)
+                if (obj != null)
                 {
-                    enemyWave2[i].GetComponent<EnemyState>().isFollow = true;
+                    allDestroyed = false;
+                    Debug.Log(index);
+                    break;
                 }
-                isWave1Done = false;
             }
-        }
 
-        if(isWave2Done)
-        {
-            if (player.transform.position.x >= 32)
+            if(allDestroyed)
             {
-                cf.minXLimit = 30;
-                for (int i = 0; i < enemyWave3.Length; i++)
+                allWave[index].thisWaveCollider.SetActive(false);
+                index += 1;
+
+                for (int i = 0; i < allWave[index].enemyWave.Length; i++)
                 {
-                    enemyWave3[i].GetComponent<EnemyState>().isFollow = true;
+                    allWave[index].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
                 }
-                isWave2Done = false;
             }
         }
-
-        CheckWin();
+        else if(index >= allWave.Length)
+        {
+            Debug.Log("win");
+        } 
     }
+}
 
-    private void CheckWave(GameObject[] ObjWave, float maxLimit, GameObject waveColl)
-    {
-        bool allDestroyed = true;
-
-        foreach (GameObject obj in ObjWave)
-        {
-            if (obj != null)
-            {
-                allDestroyed = false;
-                break;
-            }
-        }
-
-        if (allDestroyed)
-        {
-            Debug.Log("All objects are destroyed.");
-            cf.maxXLimit = maxLimit;
-            waveColl.SetActive(false);
-        }
-    }
-
-    private void CheckWin()
-    {
-        bool allDestroyed = true;
-
-        foreach (GameObject obj in allEnemy)
-        {
-            if (obj != null)
-            {
-                allDestroyed = false;
-                break;
-            }
-        }
-
-        if (allDestroyed)
-        {
-            Debug.Log("All objects are destroyed.");
-            panelWin.SetActive(true);
-        }
-    }
+[System.Serializable]
+public class EnemyWave
+{
+    public GameObject[] enemyWave;
+    public GameObject thisWaveCollider;
+    public float maxCameraLimit;
 }
