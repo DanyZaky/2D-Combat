@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3439ccf362a2304f8d361d1a1cead45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
   moveSpeed: 1
   damageAmount: 1
   enemyHealth: 5

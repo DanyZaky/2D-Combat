@@ -15,7 +15,7 @@ public class BossHealthPoint : MonoBehaviour
     private void Start()
     {
         bossHPObject.SetActive(false);
-        maxHP = es.maxEnemyHealth + 20;
+        maxHP = es.enemyHealth;
     }
 
     private void Update()

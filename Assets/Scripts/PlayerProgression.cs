@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerProgression : MonoBehaviour
 {
+    public int IndexToScene;
+    
     public CameraFollow cf;
     public GameObject player;
 
@@ -13,6 +16,7 @@ public class PlayerProgression : MonoBehaviour
     public GameObject animFade;
 
     public int waveIndex;
+    private bool isWin;
 
     private void Start()
     {
@@ -27,6 +31,8 @@ public class PlayerProgression : MonoBehaviour
         {
             allWave[waveIndex].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
         }
+
+        isWin = false;
 
         StartCoroutine(FadeBlack("fade out"));
     }
@@ -61,7 +67,7 @@ public class PlayerProgression : MonoBehaviour
         }
         else if(waveIndex >= allWave.Length)
         {
-            Debug.Log("win");
+            isWin = true;
 
             StartCoroutine(FadeBlack("fade in"));
         } 
@@ -72,7 +78,14 @@ public class PlayerProgression : MonoBehaviour
         animFade.GetComponent<Animator>().Play(name);
         animFade.SetActive(true);
         yield return new WaitForSeconds(2f);
-        animFade.SetActive(false);
+        if(isWin)
+        {
+            SceneManager.LoadScene(IndexToScene);
+        }
+        else
+        {
+            animFade.SetActive(false);
+        }
     }
 }
 

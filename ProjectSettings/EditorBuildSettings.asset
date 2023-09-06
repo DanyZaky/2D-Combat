@@ -6,6 +6,57 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Cutscene/Prolog Level 1.unity
+    guid: 3113210568148854885c01a978b3c097
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Prolog Level 2.unity
+    guid: f5ee29616e0dc51448b7adb60b44a390
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Prolog Level 3.unity
+    guid: a2aea2b3f117d8a4e8b32fd83c1884cf
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Prolog Level 4.unity
+    guid: 324d9f1e6190d0e44b0fb89b95d0ba15
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Prolog Level 5.unity
+    guid: c75ea6e116de8844da782d1b1c81b200
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Prolog Level 6.unity
+    guid: b9ba0be3b522d08499f4f3f7382c01d6
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 1.unity
+    guid: 8716be175d485de4a9719f1a470fa9ec
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 2.unity
+    guid: eb2341795a46b904a9bbbb93b3e39c31
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 3.unity
+    guid: c0070e4dc0a7ecf49bb87f6e14e16aef
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 4.unity
+    guid: 1d0b98cbfdaf8414a9f9106583d80d03
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 5.unity
+    guid: 630ca0e459cef4045ba3260d2d66d88b
+  - enabled: 1
+    path: Assets/Scenes/Level/Level 6.unity
+    guid: 179d9b926904e9e4fa086c613fa02d1e
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Postlog Level 1.unity
+    guid: 940fec5160cafc248bba0003d3757df9
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Postlog Level 2.unity
+    guid: 03821c743d228414889e5cad392312f5
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Postlog Level 3.unity
+    guid: 1fbfc20f31421fb45bc80050420eb59e
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Postlog Level 4.unity
+    guid: 5f4bc6dc0244d5a48b8109c02919fd64
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Postlog Level 5.unity
+    guid: cf835a4a8a0abba4aa275dbcda77b0e5
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Postlog Level 6.unity
+    guid: 9bba44f43824a724fbee5eb88051b7d9
   m_configObjects: {}

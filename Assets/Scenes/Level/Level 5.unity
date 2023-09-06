@@ -5120,6 +5120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eff01d5c9de35d4ab29bb7f8531304b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IndexToScene: 16
   cf: {fileID: 963194229}
   player: {fileID: 1657048467}
   allWave:
