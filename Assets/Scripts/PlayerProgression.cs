@@ -12,20 +12,20 @@ public class PlayerProgression : MonoBehaviour
 
     public GameObject animFade;
 
-    private int index;
+    public int waveIndex;
 
     private void Start()
     {
-        index = 0;
+        waveIndex = 0;
 
         for (int i = 0; i < allWave.Length; i++)
         {
             allWave[i].thisWaveCollider.SetActive(true);
         }
 
-        for (int i = 0; i < allWave[index].enemyWave.Length; i++)
+        for (int i = 0; i < allWave[waveIndex].enemyWave.Length; i++)
         {
-            allWave[index].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
+            allWave[waveIndex].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
         }
 
         StartCoroutine(FadeBlack("fade out"));
@@ -33,33 +33,33 @@ public class PlayerProgression : MonoBehaviour
 
     private void Update()
     {
-        if (index < allWave.Length)
+        if (waveIndex < allWave.Length)
         {
             bool allDestroyed = true;
-            cf.maxXLimit = allWave[index].maxCameraLimit;
+            cf.maxXLimit = allWave[waveIndex].maxCameraLimit;
 
-            foreach (GameObject obj in allWave[index].enemyWave)
+            foreach (GameObject obj in allWave[waveIndex].enemyWave)
             {
                 if (obj != null)
                 {
                     allDestroyed = false;
-                    Debug.Log(index);
+                    Debug.Log(waveIndex);
                     break;
                 }
             }
 
             if(allDestroyed)
             {
-                allWave[index].thisWaveCollider.SetActive(false);
-                index += 1;
+                allWave[waveIndex].thisWaveCollider.SetActive(false);
+                waveIndex += 1;
 
-                for (int i = 0; i < allWave[index].enemyWave.Length; i++)
+                for (int i = 0; i < allWave[waveIndex].enemyWave.Length; i++)
                 {
-                    allWave[index].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
+                    allWave[waveIndex].enemyWave[i].GetComponent<EnemyState>().isFollow = true;
                 }
             }
         }
-        else if(index >= allWave.Length)
+        else if(waveIndex >= allWave.Length)
         {
             Debug.Log("win");
 
@@ -71,7 +71,7 @@ public class PlayerProgression : MonoBehaviour
     {
         animFade.GetComponent<Animator>().Play(name);
         animFade.SetActive(true);
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(2f);
         animFade.SetActive(false);
     }
 }

@@ -6,6 +6,8 @@ using TMPro;
 
 public class EnemyState : MonoBehaviour
 {
+    public bool isBoss = false;
+    
     public float moveSpeed = 3f;
     public int damageAmount = 10;
     public float enemyHealth;
@@ -53,6 +55,11 @@ public class EnemyState : MonoBehaviour
         maxEnemyHealth = enemyHealth;
         hpBar.SetActive(false);
         playerObj.GetComponent<PlayerMovement>().hpBar.SetActive(false);
+
+        if(isBoss)
+        {
+            enemyHealth += 20;
+        }
     }
 
     private void Update()
@@ -85,6 +92,11 @@ public class EnemyState : MonoBehaviour
         }
 
         enemyHealthBar.fillAmount = enemyHealth / maxEnemyHealth;
+
+        if(isBoss)
+        {
+            hpBar.SetActive(false);
+        }
     }
 
     private void EnemyFollow()

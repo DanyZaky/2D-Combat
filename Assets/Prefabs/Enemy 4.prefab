@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  damageAmount: 10
+  damageAmount: 4
   enemyHealth: 15
   maxEnemyHealth: 0
   anim: {fileID: 3355250202162670861}

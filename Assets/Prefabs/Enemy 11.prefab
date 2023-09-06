@@ -155,14 +155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3439ccf362a2304f8d361d1a1cead45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   damageAmount: 10
-  enemyHealth: 15
+  enemyHealth: 25
   maxEnemyHealth: 0
   anim: {fileID: 3355250202162670861}
   enemyHealthBar: {fileID: 3355250202715558266}
   isMoving: 1
-  attackDelay: 1
+  attackDelay: 2
   isFollow: 0
   textDamage: {fileID: 2967169661730449534, guid: 430dad00c34740141823835dce191067, type: 3}
   offsetTextDamage: 1
