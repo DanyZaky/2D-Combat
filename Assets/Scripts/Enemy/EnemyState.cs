@@ -12,6 +12,7 @@ public class EnemyState : MonoBehaviour
     public int damageAmount = 10;
     public float enemyHealth;
     public float maxEnemyHealth;
+    public float playerLifesteal;
     public Animator anim;
     public Image enemyHealthBar;
 
@@ -177,6 +178,7 @@ public class EnemyState : MonoBehaviour
     {
         hpBar.SetActive(true);
         yield return new WaitForSeconds(1f);
+        playerObj.GetComponent<PlayerMovement>().playerHealth += playerLifesteal;
         hpBar.SetActive(false);
     }
 

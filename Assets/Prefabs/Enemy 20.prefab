@@ -160,6 +160,7 @@ MonoBehaviour:
   damageAmount: 12
   enemyHealth: 35
   maxEnemyHealth: 0
+  playerLifesteal: 50
   anim: {fileID: 3355250202162670861}
   enemyHealthBar: {fileID: 3355250202715558266}
   isMoving: 1
@@ -171,9 +172,9 @@ MonoBehaviour:
   AnimationRun: Enemy Run
   AnimationIdle: Enemy Idle
   AnimationDeath: Enemy Death
-  AnimationAttack1: Enemy Attack 1
-  AnimationAttack2: Enemy Attack 2
-  AnimationAttack3: Enemy Attack 3
+  AnimationAttack1: Enemy Attack
+  AnimationAttack2: Enemy Attack
+  AnimationAttack3: Enemy Attack
 --- !u!65 &3355250202531569656
 BoxCollider:
   m_ObjectHideFlags: 0

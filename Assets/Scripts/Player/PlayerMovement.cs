@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject losePanel;
+    
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
     public float jumpDelay = 3f;
@@ -41,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
         specialAttackAmount = 0;
         isCooldownSpecial = false;
         currentCooldownTimeSpecial = cooldownSpecialAttack;
+
+        losePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private void Update()
@@ -76,6 +82,17 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 StartCoroutine(EnableJump(1f));
             }
+        }
+
+        if(playerHealth > maxPlayerHealth)
+        {
+            playerHealth = maxPlayerHealth;
+        }
+
+        if(playerHealth <= 0)
+        {
+            losePanel.SetActive(true);
+            Time.timeScale = 0;
         }
 
         if(isAttack)
@@ -174,5 +191,10 @@ public class PlayerMovement : MonoBehaviour
         area.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         area.SetActive(false);
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -160,6 +160,7 @@ MonoBehaviour:
   damageAmount: 10
   enemyHealth: 25
   maxEnemyHealth: 0
+  playerLifesteal: 25
   anim: {fileID: 3355250202162670861}
   enemyHealthBar: {fileID: 3355250202715558266}
   isMoving: 1
