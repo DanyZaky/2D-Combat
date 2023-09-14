@@ -5863,6 +5863,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   animFade: {fileID: 1574985957}
+  ProgressToLevel: 3
   waveIndex: 0
 --- !u!4 &1245143542
 Transform:

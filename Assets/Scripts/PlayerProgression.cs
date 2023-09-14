@@ -15,6 +15,8 @@ public class PlayerProgression : MonoBehaviour
 
     public GameObject animFade;
 
+    public int ProgressToLevel;
+
     public int waveIndex;
     private bool isWin;
 
@@ -68,7 +70,7 @@ public class PlayerProgression : MonoBehaviour
         else if(waveIndex >= allWave.Length)
         {
             isWin = true;
-
+            PlayerPrefs.SetInt("Progress Level", ProgressToLevel);
             StartCoroutine(FadeBlack("fade in"));
         } 
     }

@@ -2,16 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
     private int currentCharacter;
     public Animator characterAnim;
     public Button[] CharactersButton;
+
+    public Button[] LevelsButton;
     void Start()
     {
         currentCharacter = PlayerPrefs.GetInt("Character", 0);
         CharacterSelected(currentCharacter);
+
+        int currentProgress = PlayerPrefs.GetInt("Progress Level", 1);
+
+        for (int i = 0; i < LevelsButton.Length; i++)
+        {
+            LevelsButton[i].interactable = false;
+        }
+
+        for (int i = 0; i < currentProgress; i++)
+        {
+            LevelsButton[i].interactable = true;
+        }
     }
 
     void Update()
@@ -46,5 +61,10 @@ public class MainMenuManager : MonoBehaviour
 
         currentCharacter = index;
         PlayerPrefs.SetInt("Character", index);
+    }
+
+    public void LoadToLevel(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 }
