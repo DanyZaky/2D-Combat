@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor.Animations;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public AnimatorController[] skinCharacter;
+    
     public GameObject losePanel;
     
     public float moveSpeed = 5f;
@@ -35,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        anim.runtimeAnimatorController = skinCharacter[PlayerPrefs.GetInt("Character")];
+        
         rb = GetComponent<Rigidbody>();
         isAttack = false;
         attackArea.SetActive(false);

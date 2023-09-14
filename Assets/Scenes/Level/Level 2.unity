@@ -7455,6 +7455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6886f96e5d812694e878ce4460efc2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skinCharacter:
+  - {fileID: 9100000, guid: d1e2287b47bf03a45a2d3b090079f7c8, type: 2}
+  - {fileID: 9100000, guid: 6e2faebb6095f34448eda51b23746a17, type: 2}
+  - {fileID: 9100000, guid: 168579223e8a91142b85bcd0fc3944f8, type: 2}
   losePanel: {fileID: 1900420351}
   moveSpeed: 5
   jumpForce: 5

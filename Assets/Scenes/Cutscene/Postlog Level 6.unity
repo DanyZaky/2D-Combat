@@ -3208,6 +3208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indexToScene: 18
   animFade: {fileID: 1909984480}
+  playerAnim: {fileID: 380652833}
 --- !u!1 &1896064501
 GameObject:
   m_ObjectHideFlags: 0
