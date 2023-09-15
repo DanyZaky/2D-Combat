@@ -11,6 +11,7 @@ public class MainMenuManager : MonoBehaviour
     public Button[] CharactersButton;
 
     public Button[] LevelsButton;
+
     void Start()
     {
         currentCharacter = PlayerPrefs.GetInt("Character", 0);
