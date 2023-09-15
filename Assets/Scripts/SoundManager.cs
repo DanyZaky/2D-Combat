@@ -57,7 +57,10 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < BackgroundMusicSource.Length; i++)
         {
-            BackgroundMusicSource[i].GetComponent<AudioSource>().Stop();
+            if (BackgroundMusicSource[i].name == name)
+            {
+                BackgroundMusicSource[i].GetComponent<AudioSource>().Stop();
+            }
         }
     }
 }

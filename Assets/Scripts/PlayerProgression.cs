@@ -22,6 +22,7 @@ public class PlayerProgression : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.PlayBGM("BGM - Regular");
         waveIndex = 0;
 
         for (int i = 0; i < allWave.Length; i++)
@@ -71,6 +72,7 @@ public class PlayerProgression : MonoBehaviour
         {
             isWin = true;
             PlayerPrefs.SetInt("Progress Level", ProgressToLevel);
+            SoundManager.Instance.StopBGM("BGM - Boss");
             StartCoroutine(FadeBlack("fade in"));
         } 
     }

@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                SoundManager.Instance.PlaySFX("SFX - Jump");
                 StartCoroutine(EnableJump(1f));
             }
         }
@@ -131,12 +132,39 @@ public class PlayerMovement : MonoBehaviour
     public void BasicAttack()
     {
         StartCoroutine(AttacAnimkDelay("BasicAttack"));
+        int random = Random.Range(0, 3);
+        if(random == 0)
+        {
+            SoundManager.Instance.PlaySFX("SFX - Attack 1");
+        }
+        else if(random == 1)
+        {
+            SoundManager.Instance.PlaySFX("SFX - Attack 2");
+        }
+        else if(random == 2)
+        {
+            SoundManager.Instance.PlaySFX("SFX - Attack 3");
+        }
         StartCoroutine(AttackDelay(attackArea));
     }
 
     public void SpecialAttack()
     {
         specialAttackAmount += 1;
+
+        int random = Random.Range(0, 3);
+        if (random == 0)
+        {
+            SoundManager.Instance.PlaySFX("SFX - Attack 1");
+        }
+        else if (random == 1)
+        {
+            SoundManager.Instance.PlaySFX("SFX - Attack 2");
+        }
+        else if (random == 2)
+        {
+            SoundManager.Instance.PlaySFX("SFX - Attack 3");
+        }
 
         StartCoroutine(AttacAnimkDelay("SpecialAttack"));
         StartCoroutine(AttackDelay(specialAttackArea));
@@ -177,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             StartCoroutine(EnableJump(1f));
+            SoundManager.Instance.PlaySFX("SFX - Jump");
         }
     }
 

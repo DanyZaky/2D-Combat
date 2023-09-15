@@ -11,17 +11,26 @@ public class BossHealthPoint : MonoBehaviour
     public EnemyState es;
 
     private float maxHP;
+    private bool isActive;
 
     private void Start()
     {
         bossHPObject.SetActive(false);
         maxHP = es.enemyHealth;
+        isActive = false;
     }
 
     private void Update()
     {
         if(pp.waveIndex == (pp.allWave.Length - 1))
         {
+            if (!isActive)
+            {
+                SoundManager.Instance.PlayBGM("BGM - Boss");
+                isActive = true;
+                
+            }
+            SoundManager.Instance.StopBGM("BGM - Regular");
             bossHPObject.SetActive(true);
         }
         else

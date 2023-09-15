@@ -10,6 +10,7 @@ public class CutsceneManager : MonoBehaviour
     public Animator playerAnim;
     void Start()
     {
+        SoundManager.Instance.PlayBGM("BGM - Regular");
         StartCoroutine(WaitingLoading());
 
         if(PlayerPrefs.GetInt("Character") == 0)
@@ -36,6 +37,7 @@ public class CutsceneManager : MonoBehaviour
         animFade.GetComponent<Animator>().Play("fade in");
 
         yield return new WaitForSeconds(1.5f);
+        SoundManager.Instance.StopBGM("BGM - Regular");
         SceneManager.LoadScene(indexToScene);
     }
 }

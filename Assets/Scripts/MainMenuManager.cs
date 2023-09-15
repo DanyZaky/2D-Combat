@@ -27,6 +27,8 @@ public class MainMenuManager : MonoBehaviour
         {
             LevelsButton[i].interactable = true;
         }
+
+        SoundManager.Instance.PlayBGM("BGM - MainMenu");
     }
 
     void Update()
@@ -60,11 +62,19 @@ public class MainMenuManager : MonoBehaviour
         CharactersButton[index].interactable = false;
 
         currentCharacter = index;
+        SoundManager.Instance.PlaySFX("SFX - Button");
         PlayerPrefs.SetInt("Character", index);
     }
 
     public void LoadToLevel(string name)
     {
         SceneManager.LoadScene(name);
+        SoundManager.Instance.PlaySFX("SFX - Button");
+        SoundManager.Instance.StopBGM("BGM - MainMenu");
+    }
+
+    public void AudioButton()
+    {
+        SoundManager.Instance.PlaySFX("SFX - Button");
     }
 }
