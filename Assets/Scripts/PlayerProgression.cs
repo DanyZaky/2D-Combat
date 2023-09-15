@@ -84,7 +84,7 @@ public class PlayerProgression : MonoBehaviour
         yield return new WaitForSeconds(2f);
         if(isWin)
         {
-            SceneManager.LoadScene(IndexToScene);
+            SceneManager.LoadScene(IndexToScene+1);
         }
         else
         {

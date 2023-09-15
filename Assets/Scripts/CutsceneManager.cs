@@ -38,6 +38,6 @@ public class CutsceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         SoundManager.Instance.StopBGM("BGM - Regular");
-        SceneManager.LoadScene(indexToScene);
+        SceneManager.LoadScene(indexToScene+1);
     }
 }

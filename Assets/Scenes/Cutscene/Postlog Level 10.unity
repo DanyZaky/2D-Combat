@@ -3596,7 +3596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05760518a1577e54f8dd8830aca46ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexToScene: 0
+  indexToScene: -1
   animFade: {fileID: 1909984480}
   playerAnim: {fileID: 380652833}
 --- !u!1 &1909984480
